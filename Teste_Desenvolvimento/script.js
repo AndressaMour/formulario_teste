@@ -1,14 +1,28 @@
+const inputs = document.querySelectorAll(".input-group input");
+
 document.getElementById("contact-form").addEventListener("submit", function (event) {
-    event.preventDefault();
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const phone = document.getElementById("telefone").value.trim();
-    const message = document.getElementById("message").value.trim();
-    const service = document.getElementById("service").value.trim();
-    if (!name || !email || !message || !phone || !service) {
-      alert("Por favor, preencha todos os campos.");
-      return;
+  event.preventDefault();
+  document.getElementById("success-message").classList.remove("hidden");
+  setTimeout(() => {
+    document.getElementById("success-message").classList.add("hidden");
+  }, 3000);
+  this.reset();
+
+  inputs.forEach((input) => {
+    input.closest('.input-group').classList.remove("preenchido");
+  });
+});
+
+inputs.forEach((input) => {
+  input.addEventListener('input', () => {
+    if (input.value.trim() !== "") {
+      input.closest('.input-group').classList.add("preenchido");
+    } else {
+      input.closest('.input-group').classList.remove("preenchido");
     }
-    document.getElementById("success-message").classList.remove("hidden");
-    this.reset();
-   });
+  });
+});
+
+
+
+
